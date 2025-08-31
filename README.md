@@ -68,6 +68,23 @@ Once running, access the API docs via Swagger UI:
 
 ---
 
+## 🌐 Live Demo
+- **Swagger UI:** https://notes-api-fmsp.onrender.com/api-docs/
+- **OpenAPI JSON:** https://notes-api-fmsp.onrender.com/api-docs-json
+
+## 🔐 Try the API in Swagger
+1) `POST /api/v1/auth/register` (or use an existing user)
+2) `POST /api/v1/auth/login` → copy JWT
+3) Click **Authorize** in Swagger → paste token as: `Bearer <JWT>`
+4) Call notes endpoints
+
+## 🧪 Quick test (cURL)
+curl -X POST https://notes-api-fmsp.onrender.com/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"shubham@gmail.com","password":"secret"}'
+
+---
+
 ## 🧑‍💻 Author
 
 **Shubham Jeurkar**  
