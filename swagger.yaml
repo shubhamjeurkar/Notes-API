@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: Notes-API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://notes-api-fmsp.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  name: Shubham Jeurkar
+                  email: shubh@gmail.com
+                  password: secret
+            example:
+              name: Shubham Jeurkar
+              email: shubh@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: shubh@gmail.com
+                  password: secret
+            example:
+              email: shubh@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /notes:
+    get:
+      tags:
+      - Notes
+      summary: Get all notes
+      operationId: Getallnotes
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Notes
+      summary: Create note
+      operationId: Createnote
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreatenoteRequest'
+              - example:
+                  title: Test
+                  content: Test is backend version of angular.
+            example:
+              title: Test
+              content: Test is backend version of angular.
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /notes/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The notes ID
+    get:
+      tags:
+      - Notes
+      summary: Get single note
+      operationId: Getsinglenote
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Notes
+      summary: Update note
+      operationId: Updatenote
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdatenoteRequest'
+              - example:
+                  title: Express js
+                  content: Express is built on top of nodejs.
+            example:
+              title: Express js
+              content: Express is built on top of nodejs.
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Notes
+      summary: Delete note
+      operationId: Deletenote
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Shubham Jeurkar
+        email: shubh@gmail.com
+        password: secret
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: shubh@gmail.com
+        password: secret
+    CreatenoteRequest:
+      title: CreatenoteRequest
+      required:
+      - title
+      - content
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      example:
+        title: Test
+        content: Test is backend version of angular.
+    UpdatenoteRequest:
+      title: UpdatenoteRequest
+      required:
+      - title
+      - content
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      example:
+        title: Express js
+        content: Express is built on top of nodejs.
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+- name: Notes
